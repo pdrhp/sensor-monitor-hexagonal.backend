@@ -1,10 +1,14 @@
 package com.pedroh.sensorapihexagonalstudy.auth.application.usecase;
 
+import java.util.concurrent.CompletableFuture;
+
+import org.springframework.stereotype.Service;
+
 import com.pedroh.sensorapihexagonalstudy.auth.domain.contract.AuthenticationResult;
 import com.pedroh.sensorapihexagonalstudy.auth.domain.contract.LoginCommand;
+import com.pedroh.sensorapihexagonalstudy.auth.domain.contract.RegisterUserCommand;
 import com.pedroh.sensorapihexagonalstudy.auth.domain.port.input.AuthenticationUseCase;
 import com.pedroh.sensorapihexagonalstudy.auth.domain.port.output.AuthenticationPort;
-import org.springframework.stereotype.Service;
 
 @Service
 public class AuthenticationService implements AuthenticationUseCase {
@@ -16,15 +20,20 @@ public class AuthenticationService implements AuthenticationUseCase {
     }
 
     @Override
-    public AuthenticationResult authenticate(LoginCommand command) {
+    public CompletableFuture<AuthenticationResult> authenticate(LoginCommand command) {
         return authenticationPort.authenticate(command);
     }
 
     @Override
-    public AuthenticationResult refreshToken(String refreshToken) {
+    public CompletableFuture<AuthenticationResult> refreshToken(String refreshToken) {
         if (refreshToken == null || refreshToken.isBlank()) {
             throw new IllegalArgumentException("Refresh token não pode ser nulo ou vazio");
         }
         return authenticationPort.refreshToken(refreshToken);
+    }
+
+    @Override
+    public CompletableFuture<Void> registerUser(RegisterUserCommand command) {
+        return authenticationPort.registerUser(command);
     }
 }
