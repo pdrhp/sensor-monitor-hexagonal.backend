@@ -7,8 +7,6 @@ spring:
     username: ${DB_USERNAME:}
     password: ${DB_PASSWORD:}
 
-
-
   security:
     oauth2:
       resourceserver:
@@ -24,15 +22,13 @@ spring:
         dialect: org.hibernate.dialect.PostgreSQLDialect
         format_sql: true
 
-
   kafka:
-    bootstrap-servers: ${KAFKA_HOST:}
+    bootstrap-servers: ${KAFKA_HOST:localhost:9092}
     consumer:
       group-id: sensor-group
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
-
 
   flyway:
     enabled: true
@@ -43,6 +39,10 @@ keycloak:
   client-id: ${KEYCLOAK_CLIENT_ID:}
   client-secret: ${KEYCLOAK_CLIENT_SECRET:}
 
+app:
+  kafka:
+    topics:
+      sensor-data: ${SENSOR_DATA_TOPIC}
 
 server:
   port: 8081
