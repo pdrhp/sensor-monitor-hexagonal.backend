@@ -22,7 +22,6 @@ O projeto segue a arquitetura hexagonal, separando claramente:
 - **PostgreSQL** como banco de dados
 - **Flyway** para migrações de banco de dados
 - **Apache Kafka** para processamento de eventos em tempo real
-- **Reactor** para programação reativa
 - **Gradle** como sistema de build
 - **Docker** e **Docker Compose** para conteinerização
 
