@@ -27,8 +27,8 @@ public class SensorMetric {
     @Enumerated(EnumType.STRING)
     @Column(name = "unit", columnDefinition = "unit_type_enum")
     @ColumnTransformer(
-            write = "?::unit_type_enum",    // Converte a string para o tipo enum do PostgreSQL na escrita
-            read = "unit::VARCHAR"          // Converte o enum do PostgreSQL para string na leitura
+            write = "?::unit_type_enum",
+            read = "unit::VARCHAR"
     )
     private UnitType unit;
 
